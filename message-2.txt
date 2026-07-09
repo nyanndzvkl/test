@@ -4190,7 +4190,7 @@ local success, result = pcall(function()
     return CreateAnimeModUILibrary():MakeWindow({
         Title = "nyann os",
         SubTitle = "【By 👑nyann👑】",
-        SaveFolder = "AnimeModHub.lua"
+        SaveFolder = "nyannosfram.lua"
     })
 end)
 
@@ -4213,10 +4213,24 @@ game:GetService("StarterGui"):SetCore("SendNotification", {
     Text = "UI đã load thành công!\nChúc bạn vui vẻ!";
     Duration = 5;
 })
-local MobileButton = Minimizer:CreateMobileMinimizer({
-  Image = "rbxassetid://86224472741926",
-  BackgroundColor3 = Color3.fromRGB(0, 255, 254)
-})
+local l_ScreenGui_0 = Instance.new("ScreenGui")
+l_ScreenGui_0.Name = "ControlGUI"
+l_ScreenGui_0.Parent = game.CoreGui
+local l_ImageButton_0 = Instance.new("ImageButton")
+l_ImageButton_0.Size = UDim2.new(0, 50, 0, 50)
+l_ImageButton_0.Position = UDim2.new(0.15, 0, 0.15, 0)
+l_ImageButton_0.Image = "rbxassetid://94678517792779"
+l_ImageButton_0.BackgroundColor3 = Color3.fromRGB(255, 200, 0)
+l_ImageButton_0.BorderSizePixel = 0
+l_ImageButton_0.Parent = l_ScreenGui_0
+local l_UICorner_0 = Instance.new("UICorner")
+l_UICorner_0.CornerRadius = UDim.new(1, 0)
+l_UICorner_0.Parent = l_ImageButton_0
+local l_UIStroke_0 = Instance.new("UIStroke")
+l_UIStroke_0.Thickness = 2
+l_UIStroke_0.Color = Color3.fromRGB(255, 200, 0)
+l_UIStroke_0.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
+l_UIStroke_0.Parent = l_ImageButton_0
 local v473 = true
 local v474 = nil
 local v475 = nil
