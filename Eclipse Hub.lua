@@ -1,7 +1,7 @@
 if getgenv().EclipseHub then 
 	if game.CoreGui:FindFirstChild("Eclipse Hub GUI") then
 		for i, v in ipairs(game.CoreGui:GetChildren()) do
-			if string.find(v.Name,  "Eclipse Hub") then
+			if string.find(v.Name,  "nyann os fram") then
 				v:Destroy()
 			end
 		end
@@ -618,7 +618,7 @@ function Library:CreateWindow(Setting)
 	TextLabelMain.TextWrapped = true
 	TextLabelMain.TextXAlignment = Enum.TextXAlignment.Center
 	TextLabelMain.TextColor3 = getgenv().UIColor["GUI Text Color"]
-	TextLabelMain.Text = "<font color=\"rgb(0, 80, 200)\">Eclipse Hub</font> <font color=\"rgb(255,255,255)\">- Blox Fruit</font>"
+	TextLabelMain.Text = "<font color=\"rgb(0, 80, 200)\">nyann os fram</font> <font color=\"rgb(255,255,255)\">- Blox Fruit</font>"
 	TextLabelMain.TextStrokeTransparency = 0.8
 	TextLabelMain.TextStrokeColor3 = Color3.fromRGB(0, 0, 0)
 
@@ -697,7 +697,7 @@ function Library:CreateWindow(Setting)
 	SearchIcon.BackgroundTransparency = 1
 	SearchIcon.Position = UDim2.new(0.5, 0, 0.5, 0)
 	SearchIcon.Size = UDim2.new(0, 16, 0, 16)
-	SearchIcon.Image = "rbxassetid://8154282545"
+	SearchIcon.Image = "rbxassetid://94678517792779"
 	SearchIcon.ImageColor3 = Color3.fromRGB(240, 240, 230)
 
     SearchBox.Name = "SearchBox"
@@ -745,7 +745,7 @@ function Library:CreateWindow(Setting)
 	Shadow.Position = UDim2.new(0.5, 0, 0.5, 0)
 	Shadow.Size = UDim2.new(1, 40, 1, 40)
 	Shadow.ZIndex = 0
-	Shadow.Image = "rbxassetid://5028857084"
+	Shadow.Image = "rbxassetid://94678517792779"
 	Shadow.ImageTransparency = 0.35
 	Shadow.ScaleType = Enum.ScaleType.Slice
 	Shadow.SliceCenter = Rect.new(24, 24, 276, 276)
