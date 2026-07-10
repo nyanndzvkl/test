@@ -2306,7 +2306,7 @@ QuestNeta = function()
 		};
 	end;
 	local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/TurboLite/Script/refs/heads/main/xRedzLib.lua"))():MakeWindow({
-    Title = "nyann os fram",
+    Title = "nyann os",
     SubTitle = " | Blox Fruit",
     SaveFolder = "turbolite.json"
 })
