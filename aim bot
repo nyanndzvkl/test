@@ -1,0 +1,69 @@
+ Script hiển thị tên trên đầu nhân vật
+-- Tạo bởi: nyann os
+
+local Players = game:GetService("Players")
+local RunService = game:GetService("RunService")
+
+local player = Players.LocalPlayer
+
+-- TÙY CHỈNH
+local TEXT = "nyann os"          -- Nội dung hiển thị
+local TEXT_SIZE = 14             -- Kích thước chữ
+local GUI_OFFSET = Vector3.new(0, 1.8, 0) -- Khoảng cách so với đầu
+
+local function createBillboardFor(character)
+    if not character then return end
+    local head = character:FindFirstChild("Head") or character:FindFirstChildWhichIsA("BasePart")
+    if not head then return end
+
+    -- Xóa cũ nếu có
+    local existing = head:FindFirstChild("HNC_FastAttack_Label")
+    if existing then existing:Destroy() end
+
+    -- Tạo BillboardGui
+    local billboard = Instance.new("BillboardGui")
+    billboard.Name = "HNC_FastAttack_Label"
+    billboard.Adornee = head
+    billboard.AlwaysOnTop = true
+    billboard.Size = UDim2.new(0, 200, 0, 40)
+    billboard.StudsOffset = GUI_OFFSET
+    billboard.Parent = head
+
+    -- Tạo TextLabel màu trắng
+    local textLabel = Instance.new("TextLabel")
+    textLabel.Name = "Label"
+    textLabel.Size = UDim2.new(1, 0, 1, 0)
+    textLabel.BackgroundTransparency = 1
+    textLabel.Text = TEXT
+    textLabel.Font = Enum.Font.SourceSansBold
+    textLabel.TextSize = TEXT_SIZE
+    textLabel.TextStrokeTransparency = 0.6
+    textLabel.TextTransparency = 0
+    textLabel.TextScaled = false
+    textLabel.TextColor3 = Color3.fromRGB(255, 255, 255) -- Màu trắng
+    textLabel.Parent = billboard
+end
+
+-- Khi nhân vật xuất hiện hoặc hồi sinh
+local function onCharacterAdded(character)
+    if not character.Parent then
+        character.AncestryChanged:Wait()
+    end
+    wait(0.1)
+    createBillboardFor(character)
+end
+
+-- Chạy lần đầu
+if player.Character then
+    onCharacterAdded(player.Character)
+end
+
+-- Chạy khi hồi sinh
+player.CharacterAdded:Connect(onCharacterAdded)
+
+-- Dọn dẹp khi thoát (tuỳ chọn)
+player.AncestryChanged:Connect(function(_, parent)
+    if not parent then
+        -- Không cần làm gì thêm
+    end
+end)
