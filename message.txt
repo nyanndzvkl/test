@@ -1,3 +1,181 @@
+-- Menu Key System
+-- Tạo bởi Nyanndz
+
+local Players = game:GetService("Players")
+local LocalPlayer = Players.LocalPlayer
+local UserInputService = game:GetService("UserInputService")
+local TweenService = game:GetService("TweenService")
+
+-- Key hợp lệ (danh sách key)
+local validKeys = {
+    ["nyanndz123"] = true,
+    ["catlover"] = true,
+    ["rainbowfps"] = true,
+    ["freekey2025"] = true
+}
+
+-- Tạo GUI
+local screenGui = Instance.new("ScreenGui")
+screenGui.Name = "KeySystem"
+screenGui.ResetOnSpawn = false
+screenGui.Parent = game:GetService("CoreGui")
+
+-- Background mờ
+local background = Instance.new("Frame")
+background.Size = UDim2.new(1, 0, 1, 0)
+background.BackgroundTransparency = 0.5
+background.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+background.Parent = screenGui
+
+-- Main Frame
+local mainFrame = Instance.new("Frame")
+mainFrame.Size = UDim2.new(0, 400, 0, 280)
+mainFrame.Position = UDim2.new(0.5, -200, 0.5, -140)
+mainFrame.BackgroundTransparency = 0
+mainFrame.BackgroundColor3 = Color3.fromRGB(30, 30, 40)
+mainFrame.BorderSizePixel = 2
+mainFrame.BorderColor3 = Color3.fromRGB(255, 200, 100)
+mainFrame.ClipsDescendants = true
+mainFrame.Parent = screenGui
+
+-- Bo góc
+local corner = Instance.new("UICorner")
+corner.CornerRadius = UDim.new(0, 20)
+corner.Parent = mainFrame
+
+-- Title
+local title = Instance.new("TextLabel")
+title.Size = UDim2.new(1, 0, 0, 60)
+title.Position = UDim2.new(0, 0, 0, 0)
+title.BackgroundTransparency = 1
+title.Font = Enum.Font.GothamBold
+title.Text = "🔐 KEY SYSTEM"
+title.TextColor3 = Color3.fromRGB(255, 200, 100)
+title.TextScaled = true
+title.Parent = mainFrame
+
+-- Subtitle
+local subtitle = Instance.new("TextLabel")
+subtitle.Size = UDim2.new(1, 0, 0, 30)
+subtitle.Position = UDim2.new(0, 0, 0, 60)
+subtitle.BackgroundTransparency = 1
+subtitle.Font = Enum.Font.Gotham
+subtitle.Text = "Nhập key để kích hoạt script"
+subtitle.TextColor3 = Color3.fromRGB(200, 200, 200)
+subtitle.TextSize = 16
+subtitle.TextScaled = false
+subtitle.Parent = mainFrame
+
+-- Ô nhập key
+local keyInput = Instance.new("TextBox")
+keyInput.Size = UDim2.new(0, 300, 0, 45)
+keyInput.Position = UDim2.new(0.5, -150, 0, 105)
+keyInput.BackgroundTransparency = 0
+keyInput.BackgroundColor3 = Color3.fromRGB(20, 20, 30)
+keyInput.BorderSizePixel = 2
+keyInput.BorderColor3 = Color3.fromRGB(100, 100, 150)
+keyInput.Font = Enum.Font.Gotham
+keyInput.Text = ""
+keyInput.TextColor3 = Color3.fromRGB(255, 255, 255)
+keyInput.TextSize = 20
+keyInput.PlaceholderText = "Nhập key tại đây..."
+keyInput.PlaceholderColor3 = Color3.fromRGB(150, 150, 150)
+keyInput.ClearTextOnFocus = false
+keyInput.Parent = mainFrame
+
+local inputCorner = Instance.new("UICorner")
+inputCorner.CornerRadius = UDim.new(0, 10)
+inputCorner.Parent = keyInput
+
+-- Nút Submit
+local submitBtn = Instance.new("TextButton")
+submitBtn.Size = UDim2.new(0, 140, 0, 45)
+submitBtn.Position = UDim2.new(0.25, -70, 0, 175)
+submitBtn.BackgroundTransparency = 0
+submitBtn.BackgroundColor3 = Color3.fromRGB(255, 200, 100)
+submitBtn.BorderSizePixel = 0
+submitBtn.Font = Enum.Font.GothamBold
+submitBtn.Text = "✅ XÁC NHẬN"
+submitBtn.TextColor3 = Color3.fromRGB(0, 0, 0)
+submitBtn.TextSize = 18
+submitBtn.Parent = mainFrame
+
+local btnCorner1 = Instance.new("UICorner")
+btnCorner1.CornerRadius = UDim.new(0, 10)
+btnCorner1.Parent = submitBtn
+
+-- Nút Get Key
+local getKeyBtn = Instance.new("TextButton")
+getKeyBtn.Size = UDim2.new(0, 140, 0, 45)
+getKeyBtn.Position = UDim2.new(0.75, -70, 0, 175)
+getKeyBtn.BackgroundTransparency = 0
+getKeyBtn.BackgroundColor3 = Color3.fromRGB(80, 80, 120)
+getKeyBtn.BorderSizePixel = 0
+getKeyBtn.Font = Enum.Font.GothamBold
+getKeyBtn.Text = "🔑 GET KEY"
+getKeyBtn.TextColor3 = Color3.fromRGB(255, 255, 255)
+getKeyBtn.TextSize = 18
+getKeyBtn.Parent = mainFrame
+
+local btnCorner2 = Instance.new("UICorner")
+btnCorner2.CornerRadius = UDim.new(0, 10)
+btnCorner2.Parent = getKeyBtn
+
+-- Nút Get Key: Copy link ra clipboard (không thông báo)
+getKeyBtn.MouseButton1Click:Connect(function()
+    local keyLink = "https://discord.gg/nyanndz"
+    setclipboard(keyLink)
+end)
+
+-- Hàm kiểm tra key
+local function verifyKey(inputKey)
+    if validKeys[inputKey] then
+        -- Tạo hiệu ứng biến mất
+        local tween = TweenService:Create(mainFrame, TweenInfo.new(0.5, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {
+            Size = UDim2.new(0, 0, 0, 0),
+            Position = UDim2.new(0.5, 0, 0.5, 0)
+        })
+        tween:Play()
+        tween.Completed:Wait()
+        screenGui:Destroy()
+        
+        -- Chạy script của bạn ở đây
+        -- loadstring(game:HttpGet("URL_SCRIPT_CUA_BAN"))()
+        return true
+    else
+        keyInput.Text = ""
+        keyInput.PlaceholderText = "❌ Key sai! Nhập lại..."
+        keyInput.PlaceholderColor3 = Color3.fromRGB(255, 100, 100)
+        task.wait(1.5)
+        keyInput.PlaceholderText = "Nhập key tại đây..."
+        keyInput.PlaceholderColor3 = Color3.fromRGB(150, 150, 150)
+        return false
+    end
+end
+
+-- Xác nhận bằng nút Submit
+submitBtn.MouseButton1Click:Connect(function()
+    local inputKey = keyInput.Text
+    if inputKey ~= "" then
+        verifyKey(inputKey)
+    else
+        keyInput.PlaceholderText = "⚠️ Nhập key đi bạn!"
+        keyInput.PlaceholderColor3 = Color3.fromRGB(255, 200, 100)
+        task.wait(1.5)
+        keyInput.PlaceholderText = "Nhập key tại đây..."
+        keyInput.PlaceholderColor3 = Color3.fromRGB(150, 150, 150)
+    end
+end)
+
+-- Xác nhận bằng phím Enter
+keyInput.FocusLost:Connect(function(enterPressed)
+    if enterPressed then
+        local inputKey = keyInput.Text
+        if inputKey ~= "" then
+            verifyKey(inputKey)
+        end
+    end
+end)
 do
   ply = game.Players
   plr = ply.LocalPlayer
@@ -1313,7 +1491,7 @@ QuestNeta = function()
     }
 end
 
-local redzlib = loadstring(game:HttpGet(("https://raw.githubusercontent.com/daucobonhi/Ui-Redz-V2/refs/heads/main/UiREDzV2.lua")))()
+local redzlib = loadstring(game:HttpGet("https://raw.githubusercontent.com/tlredz/Library/refs/heads/main/redz-V5-remake/main.luau"))()
 local Window = redzlib:MakeWindow({
     Title = "nyann os fram v1",
     SubTitle = "by nyann",
